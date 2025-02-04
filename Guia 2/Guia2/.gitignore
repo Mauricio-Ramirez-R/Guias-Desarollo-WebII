@@ -1,0 +1,24 @@
+# Node.js
+node_modules/
+
+# Vite
+dist/
+
+# Archivos de configuración de IDE
+.vscode/
+.idea/
+
+# Archivos del sistema operativo (macOS, Windows, etc.)
+.DS_Store
+Thumbs.db
+
+# Archivos de logs
+*.log
+
+# Dependencias locales de los proyectos de npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de entorno de desarrollo
+.env
