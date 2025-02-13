@@ -2,11 +2,11 @@ export function WatchedMoviesContainer({ children }) {
     return <>{children}</>;
 }
 
-export function WatchedMoviesList({ watched, handleRemover }) {
+export function WatchedMoviesList({ watched, onRemove }) {
     return (
         <ul className="list">
             {watched.map((movie) => (
-                <WatchedMovie movie={movie} key={movie.imdbID} onRemove={handleRemover} />
+                <WatchedMovie movie={movie} key={movie.imdbID} onRemove={onRemove} />
             ))}
         </ul>
     );
@@ -30,7 +30,7 @@ export function WatchedMovie({ movie, onRemove }) {
                     <span>⏳</span>
                     <span>{movie.runtime} min</span>
                 </p>
-                <button className="btn-delete" onClick={() => onRemove(movie.id)}>X</button>
+                <button className="btn-delete" onClick={() => onRemove(movie.imdbID)}>X</button>
             </div>
         </li>
     );

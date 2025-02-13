@@ -19,7 +19,12 @@ export default function App() {
   const { movies, isLoading, error } = useFetchMovies(query);
 
   // Estado de películas vistas
-  const [watched, setWatched] = useState([]);
+  function initialWatched() {
+    const localStorageWatched = localStorage.getItem('watchedMovies');
+    return localStorageWatched ? JSON.parse(localStorageWatched) : [];
+  }
+
+  const [watched, setWatched] = useState(initialWatched);;
 
   // Estado para la película seleccionada
   const [selectedId, setSelectedId] = useState(null);
@@ -44,11 +49,19 @@ export default function App() {
       * @param {Object} movie - Película a agregar.
       */
   function handleAddWatched(movie) {
-    setWatched((watched) => [...watched, movie]);
+    setWatched((prevWatched) => {
+      const newWatched = [...prevWatched, movie];
+      localStorage.setItem('watchedMovies', JSON.stringify(newWatched));
+      return newWatched;
+    });
   }
 
-  function handleRemover(id) {
-      setWatched((watched) => watched.filter((movie) => movie.id !== id));                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+  function movieRemover(imdbID) {
+    setWatched((prevWatched) => {
+      const updatedWatched = prevWatched.filter((movie) => movie.imdbID !== imdbID);
+      localStorage.setItem('watchedMovies', JSON.stringify(updatedWatched));
+      return updatedWatched;
+    });
   }
 
   return (
@@ -77,7 +90,7 @@ export default function App() {
             ) : (
               <>
                 <WatchedSummary watched={watched} />
-                <WatchedMoviesList watched={watched} onRemover={handleRemover} />
+                <WatchedMoviesList watched={watched} onRemove={movieRemover} />
               </>
             )}
           </WatchedMoviesContainer>
