@@ -5,7 +5,7 @@ import { useAppStore } from '../store/useAppStore';
 
 export default function Modal() {
 
-    // Leyendo valores del store   
+    // leyendo valores del store   
     const modal = useAppStore((state) => state.modal)
     const closeModal = useAppStore((state) => state.closeModal)
     const selectedRecipe = useAppStore((state) => state.selectedRecipe)
@@ -14,7 +14,7 @@ export default function Modal() {
     const favoritesExists = useAppStore((state) => state.favoritesExists)
     const showNotification = useAppStore((state) => state.showNotification)
 
-    //Funcion para renderizar la lista de ingredientes de una bebida 
+    //funcion para renderizar la lista de ingredientes de una bebida 
     const renderIngredients = () => {
         const ingredients = []
         for (let i = 0; i < 10; i++) {
